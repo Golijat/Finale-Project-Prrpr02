@@ -16,6 +16,8 @@ next_six_hours_symbol_code|
 
 |Weather Get|
 |---|
+|***Inherit***|
+|Weather Fetch|
 |***Attributes***|
 |current_weather_temp 
 current_weather_symbol_code
