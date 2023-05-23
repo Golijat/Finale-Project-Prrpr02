@@ -97,7 +97,8 @@ def display_weather(lat, lon, name):
     fetch = WeatherFetch(lat,lon)
     fetch.start()
     current_weather_display_label.configure(text=f"{fetch.curTemp()} {fetch.curSymbol()}")
-    next_six_hours_weather_display_label.configure(text=f"{fetch.nextSixTemp()} {fetch.nextSixSymbol()}")
+    next_six_hours_weather_display_label.\
+        configure(text=f"{fetch.nextSixTemp()} {fetch.nextSixSymbol()}")
     city_name_display_label.configure(text=name)
     current_display_label.configure(text="Current Weather")
     next_six_hours_display_label.configure(text="Next Six Hours Weather")
