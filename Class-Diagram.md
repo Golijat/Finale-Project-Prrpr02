@@ -29,6 +29,13 @@ get_current_weather_symbol_code
 get_next_six_hours_temp
 get_next_six_hours_symbol_code|
 
+|City|
+|---|
+|***Attributes***|
+|name
+lat
+lon|
+
 Använd fetch för att hämta väder information från yr.
 Använd tkinter för GUI där man kan visa informaitonen.
 Hämta väder informationen med en klass, ha sen en annan
