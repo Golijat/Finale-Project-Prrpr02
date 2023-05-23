@@ -6,7 +6,7 @@ from tkinter import Tk, Label, END, Toplevel, Button, Entry
 # from tkinter import ttk
 from coordinates import coord
 from weather_fetch import WeatherFetch
-from list_gui import ChooseCity
+from city_list_gui import ChooseCity
 from blocks import TopBlock
 
 
@@ -42,8 +42,11 @@ def search_for_city(city_name):
     """
     # First the display labels and search entry field is cleared.
     search_bar.delete(0, END)
-    weather_display_label.configure(text="")
     city_name_display_label.configure(text="")
+    current_display_label.configure(text="")
+    current_weather_display_label.configure(text="")
+    next_six_hours_display_label.configure(text="")
+    next_six_hours_weather_display_label.configure(text="")
 
     # Checks weather something has been put into the entry field.
     # If not it exits the function.
@@ -59,7 +62,7 @@ def search_for_city(city_name):
         # If no place with the city name exists, then nothing is returend
         # and the except function goes into effect.
         if city_list == []:
-            weather_display_label.configure(text="City searched for does not exist")
+            current_weather_display_label.configure(text="City searched for does not exist")
 
         # Opens a new window where the user can choose the specifc city
         # that they want.
@@ -84,7 +87,7 @@ def search_for_city(city_name):
     except:
         # If something goes wrong with getting a list of cities and opening a new window
         # then an error message is displayed.
-        weather_display_label.configure(text="An Error Occured, please try again")
+        city_name_display_label.configure(text="An Error Occured, please try again")
 
 def display_weather(lat, lon, name):
     """
@@ -93,12 +96,29 @@ def display_weather(lat, lon, name):
     """
     fetch = WeatherFetch(lat,lon)
     fetch.start()
-    weather_display_label.configure(text=f"{fetch.curTemp()} {fetch.curSymbol()}")
+    current_weather_display_label.configure(text=f"{fetch.curTemp()} {fetch.curSymbol()}")
+    next_six_hours_weather_display_label.configure(text=f"{fetch.nextSixTemp()} {fetch.nextSixSymbol()}")
     city_name_display_label.configure(text=name)
+    current_display_label.configure(text="Current Weather")
+    next_six_hours_display_label.configure(text="Next Six Hours Weather")
 
-# Used to display the weather on screen.
-weather_display_label = Label(root, text="")
-weather_display_label.grid(row=3,column=1)
+# Used to write the words "Current Weather" over
+# the current weather.
+current_display_label = Label(root, text="")
+current_display_label.grid(row=3, column=1)
+
+# Used to write the words "Next Six Hours Weather"
+# over the next six hours weather.
+next_six_hours_display_label = Label(root, text="")
+next_six_hours_display_label.grid(row=5, column=1)
+
+# Used to display the current weather on screen.
+current_weather_display_label = Label(root, text="")
+current_weather_display_label.grid(row=4,column=1)
+
+# Used to display the next six hours weather on screen.
+next_six_hours_weather_display_label = Label(root, text="")
+next_six_hours_weather_display_label.grid(row=6,column=1)
 
 # Used to display the city name over the cities weather on screen.
 city_name_display_label = Label(root, text="")
